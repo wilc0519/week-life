@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import { userApi } from '../api/userApi';
 import { Login } from './Login';
 import { Logout } from './Logout';
+import { NavBar } from './NavBar';
 
 
 export const Authentication =()=>{
@@ -53,12 +54,7 @@ export const Authentication =()=>{
     }
     return(
         <div>
-            <h1>Login with google</h1>
-            <img src={url} alt={name}></img>
-            <h3>welcome: {name} {lastName}</h3>
-            <h3>Email: {email}</h3>
-            <br></br>
-            <br></br>
+            
             {
                 showLoginButton
                 ?<Login clientId={clientId} onLoginSuccess={onLoginSuccess} onLoginFailure={onLoginFailure}/>

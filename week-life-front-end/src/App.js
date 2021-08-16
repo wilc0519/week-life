@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Authentication} from './components/Authentication';
 import { DateBirth } from './pages/DateBirth';
 import { TableMessages } from './pages/TableMessages';
+import { Principal } from './pages/Principal';
 function App() {
   return (
     <div className="App">
@@ -11,7 +12,7 @@ function App() {
           <div className="App-header">
             <Switch>
               <Route path="/"exact>
-                <Authentication/>
+                <Principal/>
               </Route>
               <Route path="/birthday">
                 <DateBirth/>
