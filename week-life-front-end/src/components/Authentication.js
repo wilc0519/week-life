@@ -25,8 +25,6 @@ export const Authentication =()=>{
         const name = res.profileObj.givenName
         const email = res.profileObj.email
         const lastName = res.profileObj.familyName
-
-        console.log('------------------------')
         setName(res.profileObj.givenName);
         setLastName(res.profileObj.familyName);
         setEmail(res.profileObj.email);
