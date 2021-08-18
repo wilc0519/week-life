@@ -3,9 +3,9 @@ import { Authentication } from './Authentication'
 
 export const NavBar = () => {
     return (
-        <div style={{background:'red', margin:'top'}}>
+        <div>
             <nav>
-                <Authentication/>
+                <Authentication />
             </nav>
         </div>
     )

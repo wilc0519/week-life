@@ -1,30 +1,26 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {Authentication} from './components/Authentication';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { DateBirth } from './pages/DateBirth';
-import { TableMessages } from './pages/TableMessages';
 import { Principal } from './pages/Principal';
+import { NoteTable } from './pages/NoteTable';
 function App() {
   return (
     <div className="App">
-      
-        <Router>
-          <div className="App-header">
-            <Switch>
-              <Route path="/"exact>
-                <Principal/>
-              </Route>
-              <Route path="/birthday">
-                <DateBirth/>
-              </Route>
-              <Route path="/tableMessage">
-                <TableMessages/>
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-        
-      
+      <Router>
+        <div >
+          <Switch>
+            <Route path="/" exact>
+              <Principal />
+            </Route>
+            <Route path="/birthday">
+              <DateBirth />
+            </Route>
+            <Route path="/noteTable">
+              <NoteTable />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }

@@ -4,7 +4,7 @@ const User = require('../database/models/user')
 const cors = require('../middleware/cors')
 
 
-router.post('/user' ,async (req, res) => {
+router.post('/user', async (req, res) => {
 
     console.log("llega o no llega")
     try {
@@ -31,15 +31,15 @@ router.post('/user' ,async (req, res) => {
 })
 router.patch('/user/datebirth', async (req, res) => {
     try {
-        const user = await User.update({dateOfBirth:req.body.dateOfBirth},{
-            where:{
+        const user = await User.update({ dateOfBirth: req.body.dateOfBirth }, {
+            where: {
                 email: req.body.email
             }
         });
         res.send(user.firstName);
     } catch (e) {
         res.status(500).send(e)
-        
+
     }
 
 })
