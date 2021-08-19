@@ -6,7 +6,6 @@ import { Logout } from './Logout';
 
 export const Authentication = () => {
     const clientId = "869435522440-9c7q2p1ao5ki97orc02pd7nnjduq1gtn.apps.googleusercontent.com"
-    let [isSignedIn, setIsSignedIn]= useState(false)
     let [showLoginButton, setShowLoginButton] = useState(true);
     let [showLogoutButton, setShowLogoutButton] = useState(false);
     const [name, setName] = useState("");
@@ -22,7 +21,6 @@ export const Authentication = () => {
         console.log(res);
         showLoginButton = setShowLoginButton(false);
         showLogoutButton = setShowLogoutButton(true);
-        isSignedIn = setIsSignedIn(true);
 
         const name = res.profileObj.givenName;
         const email = res.profileObj.email;
@@ -49,20 +47,17 @@ export const Authentication = () => {
         alert("You have been logget out successfully");
         showLoginButton = setShowLoginButton(true);
         showLogoutButton = setShowLogoutButton(false);
-        //isSignedIn = setIsSignedIn(false)
         setName("");
         setLastName("");
         setEmail("");
         setUrl("");
-        window.location.href="http://localhost:3000/"
     }
     return (
         <div>
 
             {
                 showLoginButton
-                    ? <Login clientId={clientId} onLoginSuccess={onLoginSuccess} onLoginFailure={onLoginFailure} 
-                    isSignedIn={isSignedIn}/>
+                    ? <Login clientId={clientId} onLoginSuccess={onLoginSuccess} onLoginFailure={onLoginFailure} />
                     : null
             }
             {

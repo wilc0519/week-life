@@ -10,7 +10,6 @@ export const Login = ({clientId, onLoginSuccess, onLoginFailure, isSignedIn}) =>
             onSuccess={onLoginSuccess}
             onFailure={onLoginFailure}
             cookiePolicy={'single_host_origin'}
-            isSignedIn={isSignedIn}
             />
         </div>
     )
