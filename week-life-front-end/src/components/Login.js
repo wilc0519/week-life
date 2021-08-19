@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 
-export const Login = ({clientId, onLoginSuccess, onLoginFailure}) => {
+export const Login = ({clientId, onLoginSuccess, onLoginFailure, isSignedIn}) => {
     return(
         <div>
             <GoogleLogin
@@ -10,6 +10,7 @@ export const Login = ({clientId, onLoginSuccess, onLoginFailure}) => {
             onSuccess={onLoginSuccess}
             onFailure={onLoginFailure}
             cookiePolicy={'single_host_origin'}
+            isSignedIn={isSignedIn}
             />
         </div>
     )

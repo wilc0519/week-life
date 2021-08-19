@@ -1,8 +1,7 @@
 import React from 'react';
-import MaterialTable from 'material-table'
+import MaterialTable from 'material-table';
 import '../App.css'
 import { NavBar } from '../components/NavBar';
-import { Icon } from '@material-ui/core';
 
 export const NoteTable = () => {
 
@@ -92,7 +91,7 @@ export const NoteTable = () => {
                 title='Notes'
                 actions={[
                     {
-                        icon: 'edit',
+                        icon:'edit',
                         tooltip: 'edit note',
                         onClick: (e, rowData) => alert('You have pressed edit note')
                     }]} />
