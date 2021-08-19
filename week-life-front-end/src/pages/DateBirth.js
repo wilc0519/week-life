@@ -5,7 +5,7 @@ import '../App.css'
 import { NavBar } from '../components/NavBar';
 
 export const DateBirth = () => {
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date())
     return (
         
         <div>
