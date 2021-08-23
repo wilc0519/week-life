@@ -32,7 +32,7 @@ export const Authentication = () => {
         setLastName(res.profileObj.familyName);
         setEmail(res.profileObj.email);
         setUrl(res.profileObj.imageUrl);
-        userApi.post('http://localhost:3001/user', { firstName: name, lastName: lastName, email: email, imageUrl: url })
+        userApi.post('http://localhost:3001/user', { firstName: name, lastName: lastName, email: email, imageUrl:url})
             .then((result) => {
                 console.log("aqui esta esta verga")
                 console.log(result)
