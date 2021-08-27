@@ -1,9 +1,10 @@
 const express = require('express');
-const sequelize = require('./database/db');
+const {sequelize} = require('./models/index');
+const userR = require('./routes/userRoute')
 const app = express();
-const user = require('./database/models/user')
-const note = require('./database/models/note')
-const UserR = require('./routes/userRoute')
+// const user = require('./database/models/user')
+// const note = require('./database/models/note')
+// const UserR = require('./routes/userRoute')
 const cors = require('./middleware/cors')
 //Setting
 const PORT = process.env.PORT || 3001;
@@ -12,8 +13,8 @@ const PORT = process.env.PORT || 3001;
 //para rellenar el req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors())
-app.use(UserR)
+app.use(cors());
+app.use(userR);
 
 
 
@@ -30,7 +31,7 @@ app.get('/user',(req, res)=>{
 app.listen(PORT, function () {
     console.log('The app has started in http://localhost:' + PORT);
 //conectarse a la base de datos
-    sequelize.sync({force:true}).then(() => {
+     sequelize.authenticate().then(() => {
         console.log('successful connection');
     }).catch((error) => {
         console.log('connection error',error);

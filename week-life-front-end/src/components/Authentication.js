@@ -5,10 +5,14 @@ import { Logout } from './Logout';
 
 
 export const Authentication = () => {
+
+
+
+    console.log("componente autentication creado")
     const clientId = "869435522440-9c7q2p1ao5ki97orc02pd7nnjduq1gtn.apps.googleusercontent.com"
     let [isSignedIn, setIsSignedIn]= useState(false)
-    let [showLoginButton, setShowLoginButton] = useState(true);
-    let [showLogoutButton, setShowLogoutButton] = useState(false);
+   // let [showLoginButton, setShowLoginButton] = useState(true);
+    //let [showLogoutButton, setShowLogoutButton] = useState(false);
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -17,13 +21,11 @@ export const Authentication = () => {
     // const [accessToken, setAccessToken]=useState("");
 
     const onLoginSuccess = (res) => {
-        
         console.log('Login Success;', res.profileObjec);
         console.log(res);
-        showLoginButton = setShowLoginButton(false);
-        showLogoutButton = setShowLogoutButton(true);
-        isSignedIn = setIsSignedIn(true);
-
+        //setShowLoginButton(false);
+        //setShowLogoutButton(true);
+        setIsSignedIn(true);
         const name = res.profileObj.givenName;
         const email = res.profileObj.email;
         const lastName = res.profileObj.familyName;
@@ -47,9 +49,9 @@ export const Authentication = () => {
 
     const onSignOutSuccess = (res) => {
         alert("You have been logget out successfully");
-        showLoginButton = setShowLoginButton(true);
-        showLogoutButton = setShowLogoutButton(false);
-        isSignedIn = setIsSignedIn(false)
+       // setShowLoginButton(true);
+        //setShowLogoutButton(false);
+        setIsSignedIn(false)
         setName("");
         setLastName("");
         setEmail("");
@@ -58,17 +60,15 @@ export const Authentication = () => {
     }
     return (
         <div>
-
+{
+     <input type='text' value={isSignedIn}/>
+}
             {
-                showLoginButton
-                    ? <Login clientId={clientId} onLoginSuccess={onLoginSuccess} onLoginFailure={onLoginFailure} 
-                    isSignedIn={isSignedIn}/>
-                    : null
-            }
-            {
-                showLogoutButton
+                
+                isSignedIn
                     ? <Logout clientId={clientId} onSignOutSuccess={onSignOutSuccess} />
-                    : null
+                    : <Login clientId={clientId} onLoginSuccess={onLoginSuccess} onLoginFailure={onLoginFailure} 
+                    isSignedIno={isSignedIn}/>
             }
         </div>
     )

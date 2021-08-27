@@ -4,7 +4,6 @@ import '../App.css'
 import { NavBar } from '../components/NavBar';
 
 export const NoteTable = () => {
-
     const columns = [
         {
             title: 'ID',
@@ -95,6 +94,7 @@ export const NoteTable = () => {
                         tooltip: 'edit note',
                         onClick: (e, rowData) => alert('You have pressed edit note')
                     }]} />
+                   
         </div>
     )
 }
