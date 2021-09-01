@@ -33,19 +33,5 @@ router.put('/users', async (req, res) => {
         res.status(500).send(e)
     }
 })
-router.get('/users?email=myemail', async(req, res)=>{
-    
 
-
-    try {
-        const user = await User.findOne({
-            where:{
-                email:
-            }
-        })
-        res.status(200).send(user)
-    } catch (error) {
-        res.status(500).send(e)
-    }
-})
 module.exports = router;
