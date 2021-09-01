@@ -4,7 +4,7 @@ const cors = ()=> {
         res.header('Access-Control-Max-Age', '1000')
         res.header(
             'Access-Control-Allow-Methods',
-            'POST, GET, OPTIONS, DELETE, PUT, PATCH'
+            'POST, GET, DELETE, PUT'
         )
         res.header(
             'Access-Control-Allow-Headers',
