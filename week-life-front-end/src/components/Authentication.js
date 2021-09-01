@@ -6,25 +6,17 @@ import { Logout } from './Logout';
 
 export const Authentication = () => {
 
-
-
-    console.log("componente autentication creado")
     const clientId = "869435522440-9c7q2p1ao5ki97orc02pd7nnjduq1gtn.apps.googleusercontent.com"
     let [isSignedIn, setIsSignedIn]= useState(false)
-   // let [showLoginButton, setShowLoginButton] = useState(true);
-    //let [showLogoutButton, setShowLogoutButton] = useState(false);
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [url, setUrl] = useState("");
     
-    // const [accessToken, setAccessToken]=useState("");
 
     const onLoginSuccess = (res) => {
         console.log('Login Success;', res.profileObjec);
         console.log(res);
-        //setShowLoginButton(false);
-        //setShowLogoutButton(true);
         setIsSignedIn(true);
         const name = res.profileObj.givenName;
         const email = res.profileObj.email;
@@ -34,13 +26,10 @@ export const Authentication = () => {
         setLastName(res.profileObj.familyName);
         setEmail(res.profileObj.email);
         setUrl(res.profileObj.imageUrl);
-        userApi.post('http://localhost:3001/user', { firstName: name, lastName: lastName, email: email, imageUrl:url})
+        userApi.post('http://localhost:3001/v1/users', { firstName: name, lastName: lastName, email: email, imageUrl:url})
             .then((result) => {
-                console.log("aqui esta esta verga")
                 console.log(result)
             }).catch((error) => {
-                console.log("el error esta aqui")
-                console.log(error)
             })
     }
     const onLoginFailure = (res) => {
@@ -49,8 +38,6 @@ export const Authentication = () => {
 
     const onSignOutSuccess = (res) => {
         alert("You have been logget out successfully");
-       // setShowLoginButton(true);
-        //setShowLogoutButton(false);
         setIsSignedIn(false)
         setName("");
         setLastName("");
@@ -60,9 +47,7 @@ export const Authentication = () => {
     }
     return (
         <div>
-{
-     <input type='text' value={isSignedIn}/>
-}
+
             {
                 
                 isSignedIn

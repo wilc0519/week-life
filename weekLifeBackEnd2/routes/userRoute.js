@@ -16,12 +16,10 @@ router.post('/v1/users', async (req, res) => {
             const email = req.body.email
             const user = await User.create({ firstName, lastName, email })
             res.status(201).send(user);
-            console.log(user);
         } else {
             res.status(400).send({error:'User already exists'})
         }
     } catch (e) {
-        console.log({error:''})
         res.status(500).send(e);
     }
 })
@@ -31,7 +29,6 @@ router.patch('/v1/users', async (req, res) => {
         await user.update({ dateOfBirth: req.body.dateOfBirth }
         )
         res.status(200).send(user)
-        console.log(user)
     } catch (e) {
         res.status(500).send(e)
     }
@@ -44,7 +41,6 @@ router.get('/v1/users', async(req, res)=>{
             }
         })
         res.status(200).send(user)
-        console.log(user)
     } catch (error) {
         res.status(500).send(e)
     }

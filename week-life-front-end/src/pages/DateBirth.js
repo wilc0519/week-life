@@ -4,7 +4,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../App.css'
 import { NavBar } from '../components/NavBar';
 import { userApi } from '../api/userApi';
-//import {email} from '../components/Authentication'
 
 export const DateBirth = () => {
     const [startDate, setStartDate] = useState(new Date())
@@ -17,8 +16,6 @@ export const DateBirth = () => {
         alert(startDate)
         userApi.patch("http://localhost:3001/user/datebirth", { dateOfBirth: new Date(startDate), email: email })
             .then((result) => {
-                console.log("We are here")
-                console.log(startDate)
                 console.log(result)
             }).catch((error) => {
                 console.log("fail")

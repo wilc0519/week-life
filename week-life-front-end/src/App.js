@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { DateBirth } from './pages/DateBirth';
 import { Principal } from './pages/Principal';
 import { NoteTable } from './pages/NoteTable';
-import { Test } from './pages/Test';
 function App() {
   return (
     <div className="App">
