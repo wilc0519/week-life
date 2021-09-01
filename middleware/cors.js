@@ -10,9 +10,6 @@ const cors = ()=> {
             'Access-Control-Allow-Headers',
             'X-Requested-With, Content-Type, Origin, Authorization, Accept, Accept-Encoding'
         )
-        if (req.method === 'OPTIONS') {
-            return res.sendStatus(200)
-        }
         next()
     }
 }
