@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../database/models/user')
-router.post('/user', async (req, res) => {    
+
+router.post('/v1/users', async (req, res) => {    
     try {
         const userEmail = await User.findOne({
             where: {
@@ -14,36 +15,35 @@ router.post('/user', async (req, res) => {
             const lastName = req.body.lastName;
             const email = req.body.email
             const user = await User.create({ firstName, lastName, email })
-            res.send(user);
+            res.status(201).send(user);
             console.log(user);
         } else {
-            res.send(userEmail)
+            res.status(400).send({error:'User already exists'})
         }
     } catch (e) {
-        console.log(Error)
+        console.log({error:''})
         res.status(500).send(e);
     }
 })
-router.patch('/user/datebirth', async (req, res) => {
+router.patch('/v1/users', async (req, res) => {
     try {
         const user = await User.findOne({where:{email:req.body.email}})
         await user.update({ dateOfBirth: req.body.dateOfBirth }
         )
-        res.send(user)
+        res.status(200).send(user)
         console.log(user)
     } catch (e) {
         res.status(500).send(e)
     }
 })
-router.get('/user/datebirth', async(req, res)=>{
+router.get('/v1/users', async(req, res)=>{
     try {
         const user = await User.findOne({
-            attributes:['dateOfBirth', 'firstName'],
             where:{
                 email:req.body.email
             }
         })
-        res.send(user)
+        res.status(200).send(user)
         console.log(user)
     } catch (error) {
         res.status(500).send(e)

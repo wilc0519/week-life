@@ -1,5 +1,5 @@
 const {Model, DataTypes} = require('sequelize');
-//const {sequelize} = require('../../models/index');
+const {sequelize} = require('../../models/index');
 
 class User extends Model {
   /**
@@ -8,7 +8,6 @@ class User extends Model {
    * The `models/index` file will call this method automatically.
    */
   static associate(models) {
-    // define association here
     User.hasMany(models.Notes,{
       foreignKey:'userId',
       as:'notes'

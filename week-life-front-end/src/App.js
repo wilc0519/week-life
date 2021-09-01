@@ -19,9 +19,6 @@ function App() {
             <Route path="/noteTable">
               <NoteTable />
             </Route>
-            <Route path="/test">
-              <Test/>
-            </Route>
           </Switch>
         </div>
       </Router>
