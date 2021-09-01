@@ -4,33 +4,23 @@ const User = require('../database/models/user')
 
 router.post('/users', async (req, res) => {    
     try {
-        const userEmail = await User.findOne({
+        const userFound = await User.findOne({
             where: {
                 email: req.body.email
             }
         });
         
-        if (userEmail === null) {
+        if (userFound) {
+            res.status(400).send({error:'User already exists'})
+        } else {
             const firstName = req.body.firstName;
             const lastName = req.body.lastName;
             const email = req.body.email
             const user = await User.create({ firstName, lastName, email })
             res.status(201).send(user);
-        } else {
-            res.status(400).send({error:'User already exists'})
         }
     } catch (e) {
         res.status(500).send(e);
-    }
-})
-router.put('/users', async (req, res) => {
-    try {
-        const user = await User.findOne({where:{email:req.body.email}})
-        await user.update({ dateOfBirth: req.body.dateOfBirth }
-        )
-        res.status(200).send(user)
-    } catch (e) {
-        res.status(500).send(e)
     }
 })
 
