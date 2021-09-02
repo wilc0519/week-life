@@ -23,10 +23,19 @@ router.post('/users', async (req, res) => {
     }
 });
 router.put('/users/:user_id',async(req,res)=>{
-    const userId = req.params.user_id
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['firstName','lastName','dateOfBirth']
+    const isValidOperation = updates.every((update)=>allowedUpdates.includes(update))
+
+    if(!isValidOperation){
+        return res.status(400).send({error:'Invalid update'})
+    }
+    
     try{
+        const userId = req.params.user_id
         const user = await User.findByPk(userId)
-        await user.update({dateOfBirth: req.body.dateOfBirth})
+        updates.forEach((update) => user[update]=req.body[update])
+        await user.save()
         res.status(200).send(user)
     }catch (e){
         res.status(500).send(e)
