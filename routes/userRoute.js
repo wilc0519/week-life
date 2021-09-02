@@ -9,7 +9,6 @@ router.post('/users', async (req, res) => {
                 email: req.body.email
             }
         });
-        
         if (userFound) {
             res.status(400).send({error:'User already exists'})
         } else {
@@ -22,6 +21,16 @@ router.post('/users', async (req, res) => {
     } catch (e) {
         res.status(500).send(e);
     }
-})
+});
+router.put('/users/:user_id',async(req,res)=>{
+    const userId = req.params.user_id
+    try{
+        const user = await User.findByPk(userId)
+        await user.update({dateOfBirth: req.body.dateOfBirth})
+        res.status(200).send(user)
+    }catch (e){
+        res.status(500).send(e)
+    }
+});
 
 module.exports = router;
