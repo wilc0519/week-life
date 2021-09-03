@@ -14,8 +14,8 @@ router.post('/users', async (req, res) => {
         } else {
             const firstName = req.body.firstName;
             const lastName = req.body.lastName;
-            const email = req.body.email
-            const user = await User.create({ firstName, lastName, email })
+            const email = req.body.email;
+            const user = await User.create({ firstName, lastName, email });
             res.status(201).send(user);
         }
     } catch (e) {
@@ -28,7 +28,7 @@ router.put('/users/:user_id',async(req,res)=>{
     const isValidOperation = updates.every((update)=>allowedUpdates.includes(update))
 
     if(!isValidOperation){
-        return res.status(400).send({error:'Invalid update'})
+        res.status(400).send({error:'Invalid update'}); 
     }
     
     try{
@@ -41,5 +41,24 @@ router.put('/users/:user_id',async(req,res)=>{
         res.status(500).send(e)
     }
 });
+
+router.get('/users', async (req, res)=>{
+    try {
+        const emailToFindUser  = req.query.email
+        const user = await User.findOne({
+            where:{
+                email:emailToFindUser
+        }});
+        if(user){
+            res.status(200).send(user);
+        }
+        res.status(404).send({error:'User not found'});
+                
+    } catch (e) {
+        res.status(500).send(e);
+        
+    }
+})
+
 
 module.exports = router;
