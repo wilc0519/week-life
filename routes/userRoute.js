@@ -28,7 +28,7 @@ router.put('/users/:user_id',async(req,res)=>{
     const isValidOperation = updates.every((update)=>allowedUpdates.includes(update))
 
     if(!isValidOperation){
-        return res.status(400).send({error:'Invalid update'});
+        return res.status(400).send({error:'Invalid update'}); 
     }
     
     try{
@@ -44,14 +44,18 @@ router.put('/users/:user_id',async(req,res)=>{
 
 router.get('/users', async (req, res)=>{
     try {
-        const myEmail = req.query.email
+        const emailToFindUser  = req.query.email
         const user = await User.findOne({
             where:{
-                email:myEmail
+                email:emailToFindUser
         }});
-        res.status(200).send(user)        
+        if(user){
+            res.status(200).send(user);
+        }
+        return res.status(404).send({error:'User not found'});
+                
     } catch (e) {
-        res.status(500).send(e)
+        res.status(500).send(e);
         
     }
 })
