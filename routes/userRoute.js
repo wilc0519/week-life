@@ -45,15 +45,18 @@ router.put('/users/:user_id',async(req,res)=>{
 router.get('/users', async (req, res)=>{
     try {
         const emailToFindUser  = req.query.email
-        const user = await User.findOne({
-            where:{
-                email:emailToFindUser
-        }});
-        if(user){
-            res.status(200).send(user);
+        if(emailToFindUser){
+            const user = await User.findOne({
+                where:{
+                    email:emailToFindUser
+            }});
+            if(user){
+                res.status(200).send(user);
+            }
+            res.status(404).send({error:'User not found'});
         }
-        res.status(404).send({error:'User not found'});
-                
+        const user = await User.findAll()
+            res.status(200).send(user)
     } catch (e) {
         res.status(500).send(e);
         
@@ -73,18 +76,7 @@ router.delete('/users/:user_id', async (req,res)=>{
         res.status(500).send(e)
     }
 });
-router.get('/users/all', async(req,res)=>{
-    try {
-        const users = await User.findAll()
-        if(users){
-            res.status(200).send(users)
-        }
-        res.status(404).send({error:'Empty user registry '})
-        
-    } catch (e) {
-        res.status(500).send(e)
-    }
-})
+
 
 
 module.exports = router;
