@@ -58,6 +58,32 @@ router.get('/users', async (req, res)=>{
         res.status(500).send(e);
         
     }
+});
+
+router.delete('/users/:user_id', async (req,res)=>{
+    try {
+        const userId = req.params.user_id;
+        const user = await User.findByPk(userId)
+        if(user){
+            await user.destroy();
+            res.status(200).send({message:'User deleted'})
+        }
+        res.status(404).send({error: 'User not found'})
+    } catch (e) {
+        res.status(500).send(e)
+    }
+});
+router.get('/users/all', async(req,res)=>{
+    try {
+        const users = await User.findAll()
+        if(users){
+            res.status(200).send(users)
+        }
+        res.status(404).send({error:'Empty user registry '})
+        
+    } catch (e) {
+        res.status(500).send(e)
+    }
 })
 
 
