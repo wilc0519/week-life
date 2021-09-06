@@ -55,8 +55,8 @@ router.get('/users', async (req, res)=>{
             }
             res.status(404).send({error:'User not found'});
         }
-        const user = await User.findAll()
-            res.status(200).send(user)
+        const users = await User.findAll()
+            res.status(200).send(users)
     } catch (e) {
         res.status(500).send(e);
         
