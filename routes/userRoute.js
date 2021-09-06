@@ -45,20 +45,38 @@ router.put('/users/:user_id',async(req,res)=>{
 router.get('/users', async (req, res)=>{
     try {
         const emailToFindUser  = req.query.email
-        const user = await User.findOne({
-            where:{
-                email:emailToFindUser
-        }});
-        if(user){
-            res.status(200).send(user);
+        if(emailToFindUser){
+            const user = await User.findOne({
+                where:{
+                    email:emailToFindUser
+            }});
+            if(user){
+                res.status(200).send(user);
+            }
+            res.status(404).send({error:'User not found'});
         }
-        res.status(404).send({error:'User not found'});
-                
+        const users = await User.findAll()
+            res.status(200).send(users)
     } catch (e) {
         res.status(500).send(e);
         
     }
-})
+});
+
+router.delete('/users/:user_id', async (req,res)=>{
+    try {
+        const userId = req.params.user_id;
+        const user = await User.findByPk(userId)
+        if(user){
+            await user.destroy();
+            res.status(200).send({message:'User deleted'})
+        }
+        res.status(404).send({error: 'User not found'})
+    } catch (e) {
+        res.status(500).send(e)
+    }
+});
+
 
 
 module.exports = router;
