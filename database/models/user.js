@@ -1,8 +1,8 @@
-const {Model, DataTypes} = require('sequelize');
-const {sequelize} = require('../../models/index');
+const { Model, DataTypes } = require('sequelize')
+const { sequelize } = require('../../models/index')
 
 class User extends Model {
- 
+
 };
 User.init({
   firstName: DataTypes.STRING,
@@ -11,7 +11,7 @@ User.init({
   dateOfBirth: DataTypes.DATEONLY
 }, {
   sequelize,
-  modelName: 'User',
-});
+  modelName: 'User'
+})
 
-module.exports = User;
+module.exports = User
