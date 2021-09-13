@@ -34,7 +34,7 @@ router.put('/users/:user_id', async (req, res) => {
   try {
     const userId = req.params.user_id
     const user = await User.findByPk(userId)
-    updates.forEach((update) => user[update] === req.body[update])
+    updates.forEach((update) => { user[update] = req.body[update] })
     await user.save()
     res.status(200).send(user)
   } catch (e) {
