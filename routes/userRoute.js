@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../database/models/user')
+const Note = require('../database/models/note')
 
 router.post('/users', async (req, res) => {
   try {
@@ -72,6 +73,22 @@ router.delete('/users/:user_id', async (req, res) => {
       res.status(200).send({ message: 'User deleted' })
     }
     res.status(404).send({ error: 'User not found' })
+  } catch (e) {
+    res.status(500).send(e)
+  }
+})
+
+router.post('/users/:user_id/notes', async (req, res) => {
+  try {
+    const usrId = req.params.user_id
+    const user = await User.findByPk(usrId)
+    if (user) {
+      const description = req.body.description
+      const userId = usrId
+      const note = await Note.create({ userId, description })
+      res.status(201).send(note)
+    }
+    res.status(400).send({ error: 'User does not exist' })
   } catch (e) {
     res.status(500).send(e)
   }
