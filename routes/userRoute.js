@@ -80,11 +80,10 @@ router.delete('/users/:user_id', async (req, res) => {
 
 router.post('/users/:user_id/notes', async (req, res) => {
   try {
-    const usrId = req.params.user_id
-    const user = await User.findByPk(usrId)
+    const userId = req.params.user_id
+    const user = await User.findByPk(userId)
     if (user) {
       const description = req.body.description
-      const userId = usrId
       const note = await Note.create({ userId, description })
       res.status(201).send(note)
     }
