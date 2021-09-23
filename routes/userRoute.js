@@ -87,7 +87,7 @@ router.post('/users/:user_id/notes', async (req, res) => {
       const note = await Note.create({ userId, description })
       res.status(201).send(note)
     }
-    res.status(400).send({ error: 'User does not exist' })
+    res.status(400).send({ error: "User doesn't exist" })
   } catch (e) {
     res.status(500).send(e)
   }
