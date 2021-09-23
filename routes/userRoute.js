@@ -92,5 +92,22 @@ router.post('/users/:user_id/notes', async (req, res) => {
     res.status(500).send(e)
   }
 })
+router.get('/users/:user_id/notes', async (req, res) => {
+  try {
+    const userId = req.params.user_id
+    const user = await User.findByPk(userId)
+    if (user) {
+      const notes = await Note.findAll({
+        where: {
+          userId: userId
+        }
+      })
+      res.status(200).send(notes)
+    }
+    res.status(200).send({ message: 'User does not exist' })
+  } catch (e) {
+    res.status(500).send(e)
+  }
+})
 
 module.exports = router
