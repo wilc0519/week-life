@@ -104,7 +104,7 @@ router.get('/users/:user_id/notes', async (req, res) => {
       })
       res.status(200).send(notes)
     }
-    res.status(200).send({ message: 'User does not exist' })
+    res.status(404).send({ message: 'User does not exist' })
   } catch (e) {
     res.status(500).send(e)
   }
