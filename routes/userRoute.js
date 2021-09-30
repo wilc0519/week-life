@@ -129,7 +129,6 @@ router.delete('/users/:user_id/notes/:note_id', async (req, res) => {
         id: noteId
       }
     })
-    console.log(note)
     if (note) {
       await note.destroy()
       res.status(200).send(note)
@@ -139,5 +138,7 @@ router.delete('/users/:user_id/notes/:note_id', async (req, res) => {
     res.status(500).send(e)
   }
 })
+
+router.put('/user')
 
 module.exports = router
