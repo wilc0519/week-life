@@ -103,7 +103,17 @@ router.post('/users/:user_id/notes', async (req, res) => {
 
 router.get('/users/:user_id/notes', async (req, res) => {
   try {
+    const noteId = req.query.id
     const userId = req.params.user_id
+    if (noteId) {
+      const note = await Note.findOne({
+        where: {
+          id: noteId,
+          userId: userId
+        }
+      })
+      res.status(200).send(note)
+    }
     const user = await User.findByPk(userId)
     if (user) {
       const notes = await Note.findAll({
