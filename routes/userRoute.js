@@ -135,8 +135,8 @@ router.delete('/users/:user_id/notes/:note_id', async (req, res) => {
       res.status(200).send(note)
     }
     res.status(404).send({ message: 'Note does not exist' })
-  } catch (error) {
-
+  } catch (e) {
+    res.status(500).send(e)
   }
 })
 
