@@ -74,7 +74,6 @@ router.delete('/users/:user_id', async (req, res) => {
           userId: userId
         }
       })
-      console.log(countNote)
       if (countNote === 0) {
         await user.destroy()
         res.status(200).send({ message: 'User deleted' })
@@ -101,6 +100,7 @@ router.post('/users/:user_id/notes', async (req, res) => {
     res.status(500).send(e)
   }
 })
+
 router.get('/users/:user_id/notes', async (req, res) => {
   try {
     const userId = req.params.user_id
@@ -123,20 +123,20 @@ router.delete('/users/:user_id/notes/:note_id', async (req, res) => {
   try {
     const userId = req.params.user_id
     const noteId = req.params.note_id
-
-    const user = await User.findByPk(userId)
-    console.log(user)
-    if (user) {
-      const note = await Note.findByPk(noteId)
-      if (note) {
-        await note.destroy()
-        res.status(200).send(note)
+    const note = await Note.findOne({
+      where: {
+        userId: userId,
+        id: noteId
       }
-      res.status(404).send({ message: 'Note does not exist' })
+    })
+    console.log(note)
+    if (note) {
+      await note.destroy()
+      res.status(200).send(note)
     }
-    res.status(404).send({ message: 'User doesnot exits' })
-  } catch (e) {
-    res.status(500).send(e)
+    res.status(404).send({ message: 'Note does not exist' })
+  } catch (error) {
+
   }
 })
 
