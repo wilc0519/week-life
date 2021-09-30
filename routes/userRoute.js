@@ -139,6 +139,25 @@ router.delete('/users/:user_id/notes/:note_id', async (req, res) => {
   }
 })
 
-router.put('/user')
+router.put('/users/:user_id/notes/:note_id', async (req, res) => {
+  try {
+    const userId = req.params.user_id
+    const noteId = req.params.note_id
+    const note = await Note.findOne({
+      where: {
+        userId: userId,
+        id: noteId
+      }
+    })
+    if (note) {
+      note.description = req.body.description
+      await note.save()
+      res.status(200).send(note)
+    }
+    res.status(404).send({ message: 'Note does not exist' })
+  } catch (e) {
+    res.status(500).send(e)
+  }
+})
 
 module.exports = router
