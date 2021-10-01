@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize')
-const { sequelize } = require('../../models/index')
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../../models/index');
 
 class Note extends Model {
   static associate (models) {
