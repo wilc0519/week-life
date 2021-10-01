@@ -149,7 +149,7 @@ router.delete('/users/:user_id/notes/:note_id', async (req, res) => {
   }
 })
 
-router.put('/users/:user_id/notes/:note_id', async (req, res) => {
+router.put('/user/:user_id/notes/:note_id', async (req, res) => {
   try {
     const userId = req.params.user_id
     const noteId = req.params.note_id
