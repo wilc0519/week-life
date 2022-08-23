@@ -78,7 +78,7 @@ router.delete('/users/:user_id', async (req, res) => {
         await user.destroy()
         res.status(200).send({ message: 'User deleted' })
       }
-      res.status(500).send({ message: 'The user has notes, so it cannot be deleted ' })
+      res.status(500).send({ message: 'The user has notess, so it cannot be deleted ' })
     }
     res.status(404).send({ error: 'User not found' })
   } catch (e) {
